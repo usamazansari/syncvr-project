@@ -1,1 +1,59 @@
-<p class="font-mono"> {{ result | json }} </p>
+<div class="flex flex-col m-4 p-4 border rounded-sm">
+  <ng-container *ngIf="!!result.series.length; else noResult">
+    <ng-container *ngIf="result.series.length > 4; else shortResult">
+      <div class="flex flex-col m-0">
+        <div class="flex">
+          <button type="button"
+            class="w-8"
+            (click)="toggleSeriesView()">
+            <ng-container *ngIf="isSeriesExpanded; else collapsedSeriesButton;">
+              <span class="material-icons">expand_more</span>
+            </ng-container>
+            <ng-template #collapsedSeriesButton>
+              <span class="material-icons">chevron_right</span>
+            </ng-template>
+          </button>
+          <p class="font-bold ml-2">Series</p>
+        </div>
+        <div>
+          <ng-container *ngIf="isSeriesExpanded; else collapsedSeries">
+            <ng-container *ngFor="let number of result.series">
+              <p class="font-mono ml-10">
+                {{ number }}
+              </p>
+            </ng-container>
+          </ng-container>
+          <ng-template #collapsedSeries>
+            <p class="font-mono ml-10">
+              {{ result.series[0] }}, {{ result.series[1] }}, ..., {{ result.series[result.series.length - 1] }}
+            </p>
+          </ng-template>
+        </div>
+      </div>
+    </ng-container>
+    <ng-template #shortResult>
+      <div class="flex flex-col m-0">
+        <div class="flex">
+          <button type="button"
+            class="w-8 cursor-not-allowed"
+            disabled="true"> <span class="material-icons text-gray-300">expand_more</span> </button>
+          <p class="font-bold ml-2">Series</p>
+        </div>
+        <div>
+          <ng-container *ngFor="let number of result.series">
+            <p class="font-mono ml-10">
+              {{ number }}
+            </p>
+          </ng-container>
+        </div>
+      </div>
+    </ng-template>
+  </ng-container>
+
+  <ng-template #noResult>
+    <div class="flex justify-center items-center">
+      <p class="text-center text-red-500 font-bold">No results yet</p>
+    </div>
+  </ng-template>
+
+</div>

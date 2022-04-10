@@ -13,10 +13,6 @@ import { CoreService } from '../../services';
 export class FibonacciResultComponent implements OnInit {
   private _input$ = new BehaviorSubject<number | null>(null);
 
-  private _result$ = new BehaviorSubject<IFibonacciResult>({
-    series: [] as number[]
-  });
-
   @Input()
   set input(value: number | null) {
     this._input$.next(value);
@@ -25,12 +21,18 @@ export class FibonacciResultComponent implements OnInit {
     return this._input$.getValue();
   }
 
+  private _result$ = new BehaviorSubject<IFibonacciResult>({
+    series: [] as number[]
+  });
+
   set result(value: IFibonacciResult) {
     this._result$.next(value);
   }
   get result() {
     return this._result$.getValue();
   }
+
+  isSeriesExpanded = false;
 
   constructor(private readonly _service: CoreService) {}
 
@@ -42,5 +44,9 @@ export class FibonacciResultComponent implements OnInit {
         });
       }
     });
+  }
+
+  toggleSeriesView(): void {
+    this.isSeriesExpanded = !this.isSeriesExpanded;
   }
 }
