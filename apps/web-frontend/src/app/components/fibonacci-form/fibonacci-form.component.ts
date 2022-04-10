@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
 @Component({
@@ -7,13 +7,15 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./fibonacci-form.component.scss']
 })
 export class FibonacciFormComponent {
-  constructor(private readonly _fb: FormBuilder) {}
-
   public form = this._fb.group({
     n: [1]
   });
 
+  @Output() public triggerResult$ = new EventEmitter<number>();
+
+  constructor(private readonly _fb: FormBuilder) {}
+
   public onSubmit() {
-    console.log(this.form.value);
+    this.triggerResult$.emit(this.form.value.n);
   }
 }

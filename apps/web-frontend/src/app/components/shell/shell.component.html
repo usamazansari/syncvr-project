@@ -1,6 +1,6 @@
 <div class="container min-h-screen shell-grid">
   <div class="shell-form">
-    <syncvr-project-fibonacci-form></syncvr-project-fibonacci-form>
+    <syncvr-project-fibonacci-form (triggerResult$)="updateResult($event)"></syncvr-project-fibonacci-form>
   </div>
   <div class="shell-result">
     <syncvr-project-fibonacci-result></syncvr-project-fibonacci-result>
