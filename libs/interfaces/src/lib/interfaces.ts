@@ -1,4 +1,4 @@
-export interface FibonacciResult {
+export interface IFibonacciResult {
   series: number[];
   last?: number;
 }

@@ -1,9 +1,16 @@
 import { Injectable } from '@nestjs/common';
-import { Message } from '@syncvr-project/api-interfaces';
+import { IFibonacciResult } from '@syncvr-project/interfaces';
 
 @Injectable()
 export class AppService {
-  getData(): Message {
-    return { message: 'Welcome to api!' };
+  getFibonacci(n = 2): IFibonacciResult {
+    const series = [0, 1];
+    for (let i = 2; i <= n - 1; i++) {
+      series.push(series[i - 1] + series[i - 2]);
+    }
+    return {
+      series,
+      last: series.at(-1)
+    };
   }
 }

@@ -1,6 +1,5 @@
-import { Controller, Get } from '@nestjs/common';
-
-import { Message } from '@syncvr-project/api-interfaces';
+import { Controller, Get, Param, Query } from '@nestjs/common';
+import { IFibonacciResult } from '@syncvr-project/interfaces';
 
 import { AppService } from './app.service';
 
@@ -8,8 +7,8 @@ import { AppService } from './app.service';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get('hello')
-  getData(): Message {
-    return this.appService.getData();
+  @Get('fibonacci')
+  getFibonacci(@Query('payload') payload: number): IFibonacciResult {
+    return this.appService.getFibonacci(payload);
   }
 }

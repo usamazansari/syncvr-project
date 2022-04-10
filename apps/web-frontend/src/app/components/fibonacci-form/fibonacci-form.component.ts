@@ -8,7 +8,7 @@ import { FormBuilder } from '@angular/forms';
 })
 export class FibonacciFormComponent {
   public form = this._fb.group({
-    n: [1]
+    n: [2]
   });
 
   @Output() public triggerResult$ = new EventEmitter<number>();

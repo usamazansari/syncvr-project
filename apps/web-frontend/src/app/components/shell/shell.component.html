@@ -3,7 +3,7 @@
     <syncvr-project-fibonacci-form (triggerResult$)="updateResult($event)"></syncvr-project-fibonacci-form>
   </div>
   <div class="shell-result">
-    <syncvr-project-fibonacci-result></syncvr-project-fibonacci-result>
+    <syncvr-project-fibonacci-result [input]="input$ | async"></syncvr-project-fibonacci-result>
   </div>
   <div class="shell-history">
     <syncvr-project-history></syncvr-project-history>
