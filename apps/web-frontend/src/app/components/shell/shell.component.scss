@@ -1,0 +1,16 @@
+div.shell-grid {
+  display: grid;
+  grid-template-areas: 'form history' 'result history';
+}
+
+div.shell-form {
+  grid-area: form;
+}
+
+div.shell-result {
+  grid-area: result;
+}
+
+div.shell-history {
+  grid-area: history;
+}
