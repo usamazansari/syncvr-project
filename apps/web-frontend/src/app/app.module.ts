@@ -3,9 +3,11 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 
+import { MaterialModule } from './modules';
 import {
   FibonacciFormComponent,
   FibonacciResultComponent,
@@ -21,7 +23,14 @@ import {
     FibonacciResultComponent,
     HistoryComponent
   ],
-  imports: [BrowserModule, CommonModule, HttpClientModule, ReactiveFormsModule],
+  imports: [
+    BrowserModule,
+    CommonModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    NoopAnimationsModule,
+    MaterialModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
