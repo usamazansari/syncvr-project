@@ -1,11 +1,9 @@
-<div class="container min-h-screen shell-grid">
-  <div class="shell-form">
+<div class="container min-h-screen grid grid-cols-2">
+  <div class="flex flex-col">
     <syncvr-project-fibonacci-form (triggerResult$)="updateResult($event)"></syncvr-project-fibonacci-form>
-  </div>
-  <div class="shell-result">
     <syncvr-project-fibonacci-result [input]="input$ | async"></syncvr-project-fibonacci-result>
   </div>
-  <div class="shell-history">
+  <div class="flex">
     <syncvr-project-history></syncvr-project-history>
   </div>
 </div>

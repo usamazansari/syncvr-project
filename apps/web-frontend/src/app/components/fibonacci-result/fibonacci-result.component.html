@@ -1,6 +1,6 @@
 <div class="flex flex-col m-4 p-4 border rounded-sm">
   <ng-container *ngIf="!!result.series.length; else noResult">
-    <ng-container *ngIf="result.series.length > 4; else shortResult">
+    <ng-container *ngIf="result.series.length > 10; else shortResult">
       <div class="flex flex-col m-0">
         <div class="flex">
           <button type="button"
