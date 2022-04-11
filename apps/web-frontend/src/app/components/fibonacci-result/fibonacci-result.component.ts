@@ -1,7 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+
 import { BehaviorSubject } from 'rxjs';
 
-import { IFibonacciResult } from '@syncvr-project/interfaces';
+import { IFibonacciResult, ResultTableView } from '@syncvr-project/interfaces';
 
 import { CoreService } from '../../services';
 
@@ -11,42 +14,56 @@ import { CoreService } from '../../services';
   styleUrls: ['./fibonacci-result.component.scss']
 })
 export class FibonacciResultComponent implements OnInit {
-  private _input$ = new BehaviorSubject<number | null>(null);
+  #input$ = new BehaviorSubject<number | null>(null);
 
   @Input()
   set input(value: number | null) {
-    this._input$.next(value);
+    this.#input$.next(value);
   }
   get input() {
-    return this._input$.getValue();
+    return this.#input$.getValue();
   }
 
-  private _result$ = new BehaviorSubject<IFibonacciResult>({
+  #result$ = new BehaviorSubject<IFibonacciResult>({
     series: [] as number[]
   });
 
   set result(value: IFibonacciResult) {
-    this._result$.next(value);
+    this.#result$.next(value);
   }
   get result() {
-    return this._result$.getValue();
+    return this.#result$.getValue();
   }
 
-  isSeriesExpanded = false;
+  private _paginator!: MatPaginator;
+  @ViewChild(MatPaginator, { static: false })
+  private set paginator(paginator: MatPaginator) {
+    this._paginator = paginator;
+    this.dataSource.paginator = paginator;
+  }
+
+  displayedColumns: string[] = ['index', 'value'];
+
+  dataSource = new MatTableDataSource<ResultTableView>([]);
 
   constructor(private readonly _service: CoreService) {}
 
   ngOnInit(): void {
-    this._input$.subscribe(input => {
-      if (input !== null) {
+    this.#input$.subscribe(input => {
+      if (!!input) {
         this._service.getFibonacci(input).subscribe(result => {
-          this._result$.next(result);
+          this.#result$.next(result);
+          if (!!result.series.length) {
+            this.dataSource.data = result.series.map(
+              (fibonacci: number, index: number) => ({
+                index: index + 1,
+                value: fibonacci
+              })
+            );
+            this.dataSource.paginator = this._paginator;
+          }
         });
       }
     });
-  }
-
-  toggleSeriesView(): void {
-    this.isSeriesExpanded = !this.isSeriesExpanded;
   }
 }

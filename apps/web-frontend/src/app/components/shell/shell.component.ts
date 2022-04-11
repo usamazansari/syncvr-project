@@ -7,7 +7,7 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./shell.component.scss']
 })
 export class ShellComponent {
-  public input$ = new BehaviorSubject<number | null>(null);
+  public input$ = new BehaviorSubject<number>(0);
 
   public updateResult($: number) {
     this.input$.next($);

@@ -1,70 +1,56 @@
-<mat-card class="m-4">
-  <ng-container *ngIf="!!result.series.length; else noResult">
+<ng-container *ngIf="!!result.series.length; else noResult">
+  <mat-card class="m-4">
     <mat-card-header>
-      <mat-card-title>
-
-      </mat-card-title>
+      <mat-card-title class="font-bold">Results</mat-card-title>
+      <mat-card-subtitle>
+        <p class="my-4 font-mono">
+          <span class="text-gray-600">Series: </span>
+          <ng-container *ngIf="result.series.length > 7; else shortSeries">
+            [ {{ result.series[0] }},
+            {{ result.series[1] }}, ...,
+            {{ result.series[result.series.length - 1] }} ]
+          </ng-container>
+          <ng-template #shortSeries>
+            {{ result.series | json }}
+          </ng-template>
+        </p>
+      </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
+      <mat-table #table
+        [dataSource]="dataSource">
 
+        <!-- Index -->
+        <ng-container matColumnDef="index">
+          <mat-header-cell *matHeaderCellDef> Index </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.index}} </mat-cell>
+        </ng-container>
+
+        <!-- Value -->
+        <ng-container matColumnDef="value">
+          <mat-header-cell *matHeaderCellDef> Value </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <span class="font-mono">{{element.value}}</span>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+
+      <mat-paginator #paginator
+        [pageSize]="5"
+        [pageSizeOptions]="[5, 10, 20]"
+        [showFirstLastButtons]="true">
+      </mat-paginator>
     </mat-card-content>
-  </ng-container>
-  <ng-template #noResult>
+  </mat-card>
+</ng-container>
+
+<ng-template #noResult>
+  <mat-card>
     <mat-card-content>
       <p class="text-center text-red-500 font-bold">No results yet</p>
     </mat-card-content>
-  </ng-template>
-</mat-card>
-
-<!-- <div class="flex flex-col m-4 p-4 border rounded-sm">
-  <ng-container *ngIf="!!result.series.length; else noResult">
-    <ng-container *ngIf="result.series.length > 10; else shortResult">
-      <div class="flex flex-col m-0">
-        <div class="flex">
-          <button type="button"
-            class="w-8"
-            (click)="toggleSeriesView()">
-            <ng-container *ngIf="isSeriesExpanded; else collapsedSeriesButton;">
-              <span class="material-icons">expand_more</span>
-            </ng-container>
-            <ng-template #collapsedSeriesButton>
-              <span class="material-icons">chevron_right</span>
-            </ng-template>
-          </button>
-          <p class="font-bold ml-2">Series</p>
-        </div>
-        <div>
-          <ng-container *ngIf="isSeriesExpanded; else collapsedSeries">
-            <ng-container *ngFor="let number of result.series">
-              <p class="font-mono ml-10">
-                {{ number }}
-              </p>
-            </ng-container>
-          </ng-container>
-          <ng-template #collapsedSeries>
-            <p class="font-mono ml-10">
-              {{ result.series[0] }}, {{ result.series[1] }}, ..., {{ result.series[result.series.length - 1] }}
-            </p>
-          </ng-template>
-        </div>
-      </div>
-    </ng-container>
-    <ng-template #shortResult>
-      <div class="flex flex-col m-0">
-        <div class="flex">
-          <button type="button"
-            class="w-8 cursor-not-allowed"
-            disabled="true"> <span class="material-icons text-gray-300">expand_more</span> </button>
-          <p class="font-bold ml-2">Series</p>
-        </div>
-        <div>
-          <ng-container *ngFor="let number of result.series">
-            <p class="font-mono ml-10">
-              {{ number }}
-            </p>
-          </ng-container>
-        </div>
-      </div>
-    </ng-template>
-  </ng-container>
-</div> -->
+  </mat-card>
+</ng-template>
