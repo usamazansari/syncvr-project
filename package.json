@@ -26,10 +26,13 @@
     "@nestjs/common": "^8.0.0",
     "@nestjs/core": "^8.0.0",
     "@nestjs/platform-express": "^8.0.0",
+    "@nestjs/typeorm": "^8.0.3",
     "@nrwl/angular": "13.10.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "~7.4.0",
+    "sqlite3": "^5.0.2",
     "tslib": "^2.0.0",
+    "typeorm": "^0.2.45",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
