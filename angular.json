@@ -2,7 +2,7 @@
   "version": 2,
   "projects": {
     "api": "apps/api",
-    "interfaces": "libs/interfaces",
+    "domain": "libs/domain",
     "web-frontend": "apps/web-frontend",
     "web-frontend-e2e": "apps/web-frontend-e2e"
   }

@@ -2,7 +2,10 @@ import { Module, OnModuleDestroy } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Connection } from 'typeorm';
 
-import { HistoryDataModule, HistoryData } from './modules';
+import { HistoryDataEntity, ResultDataEntity } from '@syncvr-project/domain';
+
+import { HistoryDataModule } from './modules/history-data';
+import { ResultDataModule } from './modules/result-data';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -13,13 +16,14 @@ import { AppService } from './app.service';
       useFactory: () => ({
         type: 'sqlite',
         database: './database.sqlite',
-        entities: [HistoryData],
+        entities: [HistoryDataEntity, ResultDataEntity],
         synchronize: true,
         autoLoadEntities: true,
         logging: 'all'
       })
     }),
-    HistoryDataModule
+    HistoryDataModule,
+    ResultDataModule
   ],
   controllers: [AppController],
   providers: [AppService],

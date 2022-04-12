@@ -1,14 +1,16 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { HistoryData } from './database';
+import { HistoryDataEntity } from '@syncvr-project/domain';
+import { ResultDataModule } from '../result-data';
 
+import { AppService } from '../../app.service';
 import { HistoryDataController } from './controllers';
 import { HistoryDataService } from './services';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([HistoryData])],
+  imports: [TypeOrmModule.forFeature([HistoryDataEntity]), ResultDataModule],
   controllers: [HistoryDataController],
-  providers: [HistoryDataService]
+  providers: [AppService, HistoryDataService]
 })
 export class HistoryDataModule {}

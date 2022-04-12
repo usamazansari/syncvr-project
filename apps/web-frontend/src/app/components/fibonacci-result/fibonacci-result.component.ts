@@ -4,7 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 
 import { BehaviorSubject } from 'rxjs';
 
-import { IFibonacciResult, ResultTableView } from '@syncvr-project/interfaces';
+import { FibonacciResult, ResultTableView } from '@syncvr-project/domain';
 
 import { CoreService } from '../../services';
 
@@ -24,11 +24,9 @@ export class FibonacciResultComponent implements OnInit {
     return this.#input$.getValue();
   }
 
-  #result$ = new BehaviorSubject<IFibonacciResult>({
-    series: [] as number[]
-  });
+  #result$ = new BehaviorSubject<FibonacciResult>(new FibonacciResult({}));
 
-  set result(value: IFibonacciResult) {
+  set result(value: FibonacciResult) {
     this.#result$.next(value);
   }
   get result() {

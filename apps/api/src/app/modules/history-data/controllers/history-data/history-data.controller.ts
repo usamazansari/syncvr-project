@@ -1,6 +1,10 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
-import { HistoryData } from '@syncvr-project/interfaces';
 
+import {
+  HistoryDataEntity,
+  HistoryDataDTO,
+  ResultDataEntity
+} from '@syncvr-project/domain';
 import { HistoryDataService } from '../../services';
 
 @Controller('history-data')
@@ -8,12 +12,14 @@ export class HistoryDataController {
   constructor(private _service: HistoryDataService) {}
 
   @Post('entry')
-  createEntry(@Body('payload') payload: number): Promise<HistoryData> {
-    return this._service.createEntry(payload);
+  createEntry(
+    @Body('payload') payload: number
+  ): Promise<HistoryDataEntity | ResultDataEntity> {
+    return this._service.createEntry(new HistoryDataDTO({ payload }));
   }
 
   @Get('entries')
-  async getEntries(): Promise<HistoryData[]> {
+  async getEntries(): Promise<HistoryDataEntity[]> {
     return await this._service.getEntries();
   }
 }
