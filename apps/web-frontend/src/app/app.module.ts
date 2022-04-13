@@ -12,6 +12,7 @@ import {
   FormComponent,
   ResultComponent,
   HistoryComponent,
+  TableComponent,
   ShellComponent
 } from './components';
 
@@ -21,7 +22,8 @@ import {
     ShellComponent,
     FormComponent,
     ResultComponent,
-    HistoryComponent
+    HistoryComponent,
+    TableComponent
   ],
   imports: [
     BrowserModule,
