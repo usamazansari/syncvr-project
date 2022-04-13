@@ -2,14 +2,13 @@ import {
   BaseEntity,
   Column,
   Entity,
-  JoinColumn,
   OneToOne,
   PrimaryGeneratedColumn
 } from 'typeorm';
 
 import { ResultDataEntity } from '.';
 
-@Entity()
+@Entity('history')
 export class HistoryDataEntity extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id!: string;
@@ -20,7 +19,6 @@ export class HistoryDataEntity extends BaseEntity {
   @Column()
   payload!: number;
 
-  @OneToOne(() => ResultDataEntity)
-  @JoinColumn()
+  @OneToOne(() => ResultDataEntity, resultData => resultData.id)
   result!: string;
 }

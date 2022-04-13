@@ -1,17 +1,8 @@
-import {
-  BaseEntity,
-  PrimaryGeneratedColumn,
-  Column,
-  Entity,
-  OneToOne,
-  JoinColumn
-} from 'typeorm';
+import { BaseEntity, PrimaryColumn, Column, Entity } from 'typeorm';
 
-import { HistoryDataEntity } from '.';
-
-@Entity()
+@Entity('result')
 export class ResultDataEntity extends BaseEntity {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryColumn()
   id!: string;
 
   @Column()
@@ -19,8 +10,4 @@ export class ResultDataEntity extends BaseEntity {
 
   @Column()
   last!: number;
-
-  @OneToOne(() => HistoryDataEntity, history => history.result)
-  @JoinColumn()
-  history!: string;
 }

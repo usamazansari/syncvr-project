@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import {
-  FibonacciResult as ResultDataModel,
+  ResultDataModel,
   ResultDataEntity,
   ResultDataDTO
 } from '@syncvr-project/domain';
