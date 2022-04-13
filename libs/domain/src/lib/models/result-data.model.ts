@@ -2,8 +2,8 @@ import { FibonacciResult } from '.';
 
 export class ResultDataModel extends FibonacciResult {
   id: string;
-  series: number[];
-  last: number;
+  override series: number[];
+  override last: number;
 
   constructor({
     id = '',

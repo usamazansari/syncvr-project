@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { FibonacciResult } from '@syncvr-project/domain';
+import { ResultDataModel } from '@syncvr-project/domain';
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +9,9 @@ import { FibonacciResult } from '@syncvr-project/domain';
 export class CoreService {
   constructor(private readonly _http: HttpClient) {}
 
-  getFibonacci(n: number) {
-    return this._http.get<FibonacciResult>(`/api/fibonacci`, {
-      params: { payload: `${n}` }
+  processFibonacci(n: number) {
+    return this._http.post<ResultDataModel>(`/api/history-data/entry`, {
+      payload: `${n}`
     });
   }
 }

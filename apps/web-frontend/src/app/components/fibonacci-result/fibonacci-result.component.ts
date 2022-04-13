@@ -14,10 +14,10 @@ import { CoreService } from '../../services';
   styleUrls: ['./fibonacci-result.component.scss']
 })
 export class FibonacciResultComponent implements OnInit {
-  #input$ = new BehaviorSubject<number | null>(null);
+  #input$ = new BehaviorSubject<number>(0);
 
   @Input()
-  set input(value: number | null) {
+  set input(value: number) {
     this.#input$.next(value);
   }
   get input() {
@@ -49,14 +49,19 @@ export class FibonacciResultComponent implements OnInit {
   ngOnInit(): void {
     this.#input$.subscribe(input => {
       if (!!input) {
-        this._service.getFibonacci(input).subscribe(result => {
+        this._service.processFibonacci(input).subscribe(result => {
           this.#result$.next(result);
           if (!!result.series.length) {
+            result.series =
+              typeof result.series === 'string'
+                ? `${result.series}`.split(',').map(Number)
+                : result.series;
             this.dataSource.data = result.series.map(
-              (fibonacci: number, index: number) => ({
-                index: index + 1,
-                value: fibonacci
-              })
+              (fibonacci: number, index: number) =>
+                new ResultTableView({
+                  index: index + 1,
+                  value: fibonacci
+                })
             );
             this.dataSource.paginator = this._paginator;
           }
