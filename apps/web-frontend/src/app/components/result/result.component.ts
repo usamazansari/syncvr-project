@@ -1,7 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
-
+import { Component, Input, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 import { FibonacciResult, ResultTableView } from '@syncvr-project/domain';
@@ -33,16 +30,7 @@ export class ResultComponent implements OnInit {
     return this.#result$.getValue();
   }
 
-  private _paginator!: MatPaginator;
-  @ViewChild(MatPaginator, { static: false })
-  private set paginator(paginator: MatPaginator) {
-    this._paginator = paginator;
-    this.dataSource.paginator = paginator;
-  }
-
-  displayedColumns: string[] = ['index', 'value'];
-
-  dataSource = new MatTableDataSource<ResultTableView>([]);
+  tableData: ResultTableView[] = [];
 
   constructor(private readonly _service: CoreService) {}
 
@@ -56,14 +44,13 @@ export class ResultComponent implements OnInit {
               typeof result.series === 'string'
                 ? `${result.series}`.split(',').map(Number)
                 : result.series;
-            this.dataSource.data = result.series.map(
+            this.tableData = result.series.map(
               (fibonacci: number, index: number) =>
                 new ResultTableView({
                   index: index + 1,
                   value: fibonacci
                 })
             );
-            this.dataSource.paginator = this._paginator;
           }
         });
       }
