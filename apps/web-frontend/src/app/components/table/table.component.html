@@ -1,30 +1,20 @@
-<mat-table #table
-  [dataSource]="dataSource">
+<mat-table [dataSource]="dataSource">
 
-  <!-- Index -->
-  <ng-container matColumnDef="index">
-    <mat-header-cell *matHeaderCellDef
-      class="flex-col justify-center items-center"> Index </mat-header-cell>
-    <mat-cell *matCellDef="let element"
-      class="flex-col justify-center items-center border-r border-gray-200"> {{element.index}} </mat-cell>
+  <ng-container *ngFor="let column of columns; let index = index;">
+    <ng-container [matColumnDef]="column.identifier">
+      <mat-header-cell *matHeaderCellDef
+        class="flex-col justify-center items-center">{{ column.name }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"
+        class="flex-col justify-center items-center"
+        [ngClass]="{'font-mono': !!(index % 2)}">{{ element[column.identifier] }}
+      </mat-cell>
+    </ng-container>
   </ng-container>
 
-  <!-- Value -->
-  <ng-container matColumnDef="value">
-    <mat-header-cell *matHeaderCellDef
-      class="flex-col justify-center items-center"> Value </mat-header-cell>
-    <mat-cell *matCellDef="let element"
-      class="flex-col justify-center items-center">
-      <span class="font-mono">{{element.value}}</span>
-    </mat-cell>
-  </ng-container>
-
-  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-header-row *matHeaderRowDef="displayedColumns;"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 </mat-table>
 
-<mat-paginator #paginator
-  [pageSize]="5"
-  [pageSizeOptions]="[5, 10, 20]"
-  [showFirstLastButtons]="true">
-</mat-paginator>
+<mat-paginator [pageSizeOptions]="[5, 10, 25, 50]"
+  showFirstLastButtons></mat-paginator>

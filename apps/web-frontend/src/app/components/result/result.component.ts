@@ -4,6 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 import { FibonacciResult, ResultTableView } from '@syncvr-project/domain';
 
 import { CoreService } from '../../services';
+import { TableColumn } from '..';
 
 @Component({
   selector: 'syncvr-project-result',
@@ -31,10 +32,22 @@ export class ResultComponent implements OnInit {
   }
 
   tableData: ResultTableView[] = [];
+  tableColumns: TableColumn[] = [];
 
   constructor(private readonly _service: CoreService) {}
 
   ngOnInit(): void {
+    this.tableColumns.push(
+      new TableColumn({
+        name: 'Index',
+        identifier: 'index'
+      }),
+      new TableColumn({
+        name: 'Value',
+        identifier: 'value'
+      })
+    );
+
     this.#input$.subscribe(input => {
       if (!!input) {
         this._service.processFibonacci(input).subscribe(result => {

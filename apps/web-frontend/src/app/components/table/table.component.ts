@@ -11,10 +11,10 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./table.component.scss']
 })
 export class TableComponent implements OnInit {
-  displayedColumns: string[] = ['index', 'value'];
   dataSource = new MatTableDataSource<ResultTableView>([]);
 
   #data$ = new BehaviorSubject<ResultTableView[]>([]);
+  displayedColumns: string[] = [];
 
   @Input()
   set data(value: ResultTableView[]) {
@@ -22,6 +22,16 @@ export class TableComponent implements OnInit {
   }
   get data() {
     return this.#data$.getValue();
+  }
+
+  #columns$ = new BehaviorSubject<TableColumn[]>([]);
+
+  @Input()
+  set columns(value: TableColumn[]) {
+    this.#columns$.next(value);
+  }
+  get columns() {
+    return this.#columns$.getValue();
   }
 
   private _paginator!: MatPaginator;
@@ -35,5 +45,18 @@ export class TableComponent implements OnInit {
     this.#data$.subscribe(data => {
       this.dataSource.data = data;
     });
+    this.#columns$.subscribe(columns => {
+      this.displayedColumns = columns.map(column => column.identifier);
+    });
+  }
+}
+
+export class TableColumn {
+  name: string;
+  identifier: string;
+
+  constructor({ name = '', identifier = '' }: Partial<TableColumn>) {
+    this.name = name;
+    this.identifier = identifier;
   }
 }
