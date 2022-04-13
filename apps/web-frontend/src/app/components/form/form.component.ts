@@ -2,11 +2,11 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
 @Component({
-  selector: 'syncvr-project-fibonacci-form',
-  templateUrl: './fibonacci-form.component.html',
-  styleUrls: ['./fibonacci-form.component.scss']
+  selector: 'syncvr-project-form',
+  templateUrl: './form.component.html',
+  styleUrls: ['./form.component.scss']
 })
-export class FibonacciFormComponent {
+export class FormComponent {
   public form = this._fb.group({
     n: [2]
   });

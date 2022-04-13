@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FibonacciFormComponent } from './fibonacci-form.component';
+import { FormComponent } from './form.component';
 
 describe('FibonacciFormComponent', () => {
-  let component: FibonacciFormComponent;
-  let fixture: ComponentFixture<FibonacciFormComponent>;
+  let component: FormComponent;
+  let fixture: ComponentFixture<FormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [FibonacciFormComponent]
+      declarations: [FormComponent]
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FibonacciFormComponent);
+    fixture = TestBed.createComponent(FormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

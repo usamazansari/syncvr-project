@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FibonacciResultComponent } from './fibonacci-result.component';
+import { ResultComponent } from './result.component';
 
 describe('FibonacciResultsComponent', () => {
-  let component: FibonacciResultComponent;
-  let fixture: ComponentFixture<FibonacciResultComponent>;
+  let component: ResultComponent;
+  let fixture: ComponentFixture<ResultComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [FibonacciResultComponent]
+      declarations: [ResultComponent]
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FibonacciResultComponent);
+    fixture = TestBed.createComponent(ResultComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -9,11 +9,11 @@ import { FibonacciResult, ResultTableView } from '@syncvr-project/domain';
 import { CoreService } from '../../services';
 
 @Component({
-  selector: 'syncvr-project-fibonacci-result',
-  templateUrl: './fibonacci-result.component.html',
-  styleUrls: ['./fibonacci-result.component.scss']
+  selector: 'syncvr-project-result',
+  templateUrl: './result.component.html',
+  styleUrls: ['./result.component.scss']
 })
-export class FibonacciResultComponent implements OnInit {
+export class ResultComponent implements OnInit {
   #input$ = new BehaviorSubject<number>(0);
 
   @Input()

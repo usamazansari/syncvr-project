@@ -9,8 +9,8 @@ import { AppComponent } from './app.component';
 
 import { MaterialModule } from './modules';
 import {
-  FibonacciFormComponent,
-  FibonacciResultComponent,
+  FormComponent,
+  ResultComponent,
   HistoryComponent,
   ShellComponent
 } from './components';
@@ -19,8 +19,8 @@ import {
   declarations: [
     AppComponent,
     ShellComponent,
-    FibonacciFormComponent,
-    FibonacciResultComponent,
+    FormComponent,
+    ResultComponent,
     HistoryComponent
   ],
   imports: [
