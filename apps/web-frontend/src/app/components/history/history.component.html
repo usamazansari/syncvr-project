@@ -9,7 +9,12 @@
         <span class="material-icons">sync</span>
       </button>
     </div>
-    <syncvr-project-table [data]="tableData"
-      [columns]="tableColumns"></syncvr-project-table>
+    <ng-container *ngIf="!!tableData.length; else noData">
+      <syncvr-project-table [data]="tableData"
+        [columns]="tableColumns"></syncvr-project-table>
+    </ng-container>
+    <ng-template #noData>
+      <p class="text-center text-red-500 font-bold">No entries in the database</p>
+    </ng-template>
   </mat-card-content>
 </mat-card>

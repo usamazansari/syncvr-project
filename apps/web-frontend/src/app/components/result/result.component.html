@@ -1,4 +1,15 @@
-<ng-container *ngIf="!!result.series.length; else noResult">
+<ng-container *ngIf="result.series.length === 2; else results">
+  <mat-card class="m-4">
+    <mat-card-header class="result-card-header">
+      <mat-card-title class="font-bold">Results</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p class="text-center text-red-500 font-bold">No results yet</p>
+    </mat-card-content>
+  </mat-card>
+</ng-container>
+
+<ng-template #results>
   <mat-card class="m-4">
     <mat-card-header class="result-card-header">
       <mat-card-title class="font-bold">Results</mat-card-title>
@@ -24,14 +35,6 @@
     <mat-card-content>
       <syncvr-project-table [data]="tableData"
         [columns]="tableColumns"></syncvr-project-table>
-    </mat-card-content>
-  </mat-card>
-</ng-container>
-
-<ng-template #noResult>
-  <mat-card>
-    <mat-card-content>
-      <p class="text-center text-red-500 font-bold">No results yet</p>
     </mat-card-content>
   </mat-card>
 </ng-template>
