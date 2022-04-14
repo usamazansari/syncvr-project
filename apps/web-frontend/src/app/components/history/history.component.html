@@ -1,1 +1,15 @@
-<p>history works!</p>
+<mat-card class="m-4">
+  <mat-card-header>
+    <mat-card-title class="font-bold">History</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="flex justify-end items-center">
+      <button mat-icon-button
+        (click)="refetchHistory()">
+        <span class="material-icons">sync</span>
+      </button>
+    </div>
+    <syncvr-project-table [data]="tableData"
+      [columns]="tableColumns"></syncvr-project-table>
+  </mat-card-content>
+</mat-card>

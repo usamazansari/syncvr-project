@@ -1,9 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
-import { FibonacciResult, ResultTableView } from '@syncvr-project/domain';
+import { Result, ResultTableView } from '@syncvr-project/domain';
 
-import { CoreService } from '../../services';
 import { TableColumn } from '..';
 
 @Component({
@@ -12,19 +11,10 @@ import { TableColumn } from '..';
   styleUrls: ['./result.component.scss']
 })
 export class ResultComponent implements OnInit {
-  #input$ = new BehaviorSubject<number>(0);
+  #result$ = new BehaviorSubject<Result>(new Result({}));
 
   @Input()
-  set input(value: number) {
-    this.#input$.next(value);
-  }
-  get input() {
-    return this.#input$.getValue();
-  }
-
-  #result$ = new BehaviorSubject<FibonacciResult>(new FibonacciResult({}));
-
-  set result(value: FibonacciResult) {
+  set result(value: Result) {
     this.#result$.next(value);
   }
   get result() {
@@ -34,9 +24,33 @@ export class ResultComponent implements OnInit {
   tableData: ResultTableView[] = [];
   tableColumns: TableColumn[] = [];
 
-  constructor(private readonly _service: CoreService) {}
-
   ngOnInit(): void {
+    this.setupTableColumns();
+    this.watchResult();
+  }
+
+  private watchResult() {
+    this.#result$.subscribe(result => {
+      this.#result$.next(result);
+      if (!!result.series.length) {
+        this.setTableData({
+          series: `${result.series}`.split(',').map(Number)
+        });
+      }
+    });
+  }
+
+  private setTableData({ series = [] }: Result) {
+    this.tableData = series.map(
+      (fibonacci: number, index: number) =>
+        new ResultTableView({
+          index: index + 1,
+          value: fibonacci
+        })
+    );
+  }
+
+  private setupTableColumns() {
     this.tableColumns.push(
       new TableColumn({
         name: 'Index',
@@ -47,26 +61,5 @@ export class ResultComponent implements OnInit {
         identifier: 'value'
       })
     );
-
-    this.#input$.subscribe(input => {
-      if (!!input) {
-        this._service.processFibonacci(input).subscribe(result => {
-          this.#result$.next(result);
-          if (!!result.series.length) {
-            result.series =
-              typeof result.series === 'string'
-                ? `${result.series}`.split(',').map(Number)
-                : result.series;
-            this.tableData = result.series.map(
-              (fibonacci: number, index: number) =>
-                new ResultTableView({
-                  index: index + 1,
-                  value: fibonacci
-                })
-            );
-          }
-        });
-      }
-    });
   }
 }

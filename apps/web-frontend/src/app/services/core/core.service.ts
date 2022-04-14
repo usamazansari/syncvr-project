@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
-import { ResultDataModel } from '@syncvr-project/domain';
+import { HistoryData, ResultData } from '@syncvr-project/domain';
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +10,17 @@ import { ResultDataModel } from '@syncvr-project/domain';
 export class CoreService {
   constructor(private readonly _http: HttpClient) {}
 
-  processFibonacci(n: number) {
-    return this._http.post<ResultDataModel>(`/api/history-data/entry`, {
+  fetchFibonacci(n: number): Observable<ResultData> {
+    return this._http.post<ResultData>(`/api/history/entry`, {
       payload: `${n}`
     });
+  }
+
+  fetchHistory(): Observable<HistoryData[]> {
+    return this._http.get<HistoryData[]>(`/api/history/entries`);
+  }
+
+  fetchResult(n: number): Observable<ResultData> {
+    return this._http.get<ResultData>(`/api/result/${n}`);
   }
 }

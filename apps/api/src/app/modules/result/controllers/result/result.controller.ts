@@ -13,7 +13,7 @@ export class ResultController {
     return await this._service.getResults();
   }
 
-  @Get('result/:id')
+  @Get(':id')
   async getResult(@Param('id') id: string): Promise<ResultData> {
     return await this._service.getResult(id);
   }

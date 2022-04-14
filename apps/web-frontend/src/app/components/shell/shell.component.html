@@ -1,9 +1,11 @@
 <div class="container my-0 mx-auto min-h-screen grid grid-cols-1 lg:grid-cols-2">
   <div class="flex flex-col">
-    <syncvr-project-form (triggerResult$)="updateResult($event)"></syncvr-project-form>
-    <syncvr-project-result [input]="(input$ | async)!"></syncvr-project-result>
+    <syncvr-project-form (triggerResult$)="fetchFibonacci($event)"></syncvr-project-form>
+    <syncvr-project-result [result]="(result$ | async)!"></syncvr-project-result>
   </div>
-  <div class="flex">
-    <syncvr-project-history></syncvr-project-history>
+  <div class="flex flex-col">
+    <syncvr-project-history [history]="(history$ | async)!"
+      (fetchResult$)="fetchResult($event)"
+      (fetchHistory$)="fetchHistory()"></syncvr-project-history>
   </div>
 </div>
