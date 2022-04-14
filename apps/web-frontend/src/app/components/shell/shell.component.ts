@@ -21,6 +21,7 @@ export class ShellComponent {
   public fetchFibonacci($: number): void {
     this._service.fetchFibonacci($).subscribe(result => {
       this.result$.next(result);
+      this.fetchHistory();
     });
   }
 

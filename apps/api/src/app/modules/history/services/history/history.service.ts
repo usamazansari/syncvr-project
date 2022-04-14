@@ -30,6 +30,10 @@ export class HistoryService {
   }
 
   async getEntries(): Promise<HistoryEntity[]> {
-    return await this._history.find();
+    return await this._history.find({
+      order: {
+        timestamp: 'DESC'
+      }
+    });
   }
 }
