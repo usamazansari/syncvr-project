@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 
 import { Result, ResultTableView } from '@syncvr-project/domain';
 
-import { TableColumn } from '..';
+import { Addresser, TableColumn } from '..';
 
 @Component({
   selector: 'syncvr-project-result',
@@ -20,6 +20,18 @@ export class ResultComponent implements OnInit {
   get result() {
     return this.#result$.getValue();
   }
+
+  #addresser$ = new BehaviorSubject<Addresser | null>(null);
+
+  @Input()
+  set addresser(value: Addresser | null) {
+    this.#addresser$.next(value);
+  }
+  get addresser() {
+    return this.#addresser$.getValue();
+  }
+
+  ADDRESSER_STUB = Addresser;
 
   tableData: ResultTableView[] = [];
   tableColumns: TableColumn[] = [];

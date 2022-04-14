@@ -13,8 +13,8 @@ import { CoreService } from '../../services';
 export class ShellComponent {
   public input$ = new BehaviorSubject<number>(0);
   public result$ = new BehaviorSubject<Result>(new Result({}));
-
   public history$ = new BehaviorSubject<History[]>([]);
+  public addresser$ = new BehaviorSubject<Addresser | null>(null);
 
   constructor(private _service: CoreService) {}
 
@@ -22,6 +22,7 @@ export class ShellComponent {
     this._service.fetchFibonacci($).subscribe(result => {
       this.result$.next(result);
       this.fetchHistory();
+      this.addresser$.next(Addresser.Form);
     });
   }
 
@@ -30,9 +31,16 @@ export class ShellComponent {
       this.history$.next(history);
     });
   }
+
   public fetchResult($: number): void {
     this._service.fetchResult($).subscribe(result => {
       this.result$.next(result);
+      this.addresser$.next(Addresser.History);
     });
   }
+}
+
+export enum Addresser {
+  Form = 'form',
+  History = 'history'
 }

@@ -1,7 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
-import { History, HistoryTableView } from '@syncvr-project/domain';
+import {
+  History,
+  HistoryTableView,
+  ResultTableView
+} from '@syncvr-project/domain';
 
 import { TableColumn } from '..';
 import { CoreService } from '../../services';
@@ -33,6 +37,10 @@ export class HistoryComponent implements OnInit {
     this.refetchHistory();
     this.setupTableColumns();
     this.watchHistory();
+  }
+
+  fetchResult($: ResultTableView): void {
+    this.fetchResult$.emit($.value);
   }
 
   refetchHistory(): void {

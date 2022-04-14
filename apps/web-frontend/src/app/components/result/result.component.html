@@ -1,4 +1,4 @@
-<ng-container *ngIf="result.series.length === 2; else results">
+<ng-container *ngIf="!addresser else results">
   <mat-card class="m-4">
     <mat-card-header class="result-card-header">
       <mat-card-title class="font-bold">Results</mat-card-title>
@@ -12,7 +12,15 @@
 <ng-template #results>
   <mat-card class="m-4">
     <mat-card-header class="result-card-header">
-      <mat-card-title class="font-bold">Results</mat-card-title>
+      <mat-card-title class="font-bold">
+        Results -
+        <ng-container *ngIf="addresser === ADDRESSER_STUB.Form">
+          <span>From Input</span>
+        </ng-container>
+        <ng-container *ngIf="addresser === ADDRESSER_STUB.History">
+          <span>From History</span>
+        </ng-container>
+      </mat-card-title>
       <mat-card-subtitle>
         <div class="flex justify-between items-center">
           <p class="my-4 font-mono">

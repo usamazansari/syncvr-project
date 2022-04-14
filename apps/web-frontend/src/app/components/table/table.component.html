@@ -4,7 +4,8 @@
     <ng-container [matColumnDef]="column.identifier">
       <ng-container *ngIf="column.identifier === 'timestamp'; else nonTimestampCell">
         <mat-header-cell *matHeaderCellDef
-          class="flex-col justify-center items-center">{{ column.name }}
+          class="flex-col justify-center items-center">
+          {{ column.name }}
         </mat-header-cell>
         <mat-cell *matCellDef="let element"
           class="flex-col justify-center items-center"
@@ -14,7 +15,8 @@
       </ng-container>
       <ng-template #nonTimestampCell>
         <mat-header-cell *matHeaderCellDef
-          class="flex-col justify-center items-center">{{ column.name }}
+          class="flex-col justify-center items-center">
+          {{ column.name }}
         </mat-header-cell>
         <mat-cell *matCellDef="let element"
           class="flex-col justify-center items-center"
@@ -22,6 +24,22 @@
           {{ element[column.identifier] }}
         </mat-cell>
       </ng-template>
+    </ng-container>
+  </ng-container>
+
+  <ng-container *ngIf="viewColumn">
+    <ng-container matColumnDef="view">
+      <mat-header-cell *matHeaderCellDef
+        class="flex-col justify-center items-center">
+        View
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"
+        class="flex-col justify-center items-center">
+        <button mat-icon-button
+          (click)="triggerView(element)">
+          <span class="material-icons">visibility</span>
+        </button>
+      </mat-cell>
     </ng-container>
   </ng-container>
 
