@@ -7,15 +7,15 @@ import {
   HistoryDTO,
   ResultEntity
 } from '@syncvr-project/domain';
-import { ResultDataService } from '../../../result-data';
+import { ResultService } from '../../../result';
 import { AppService } from '../../../../app.service';
 
 @Injectable()
-export class HistoryDataService {
+export class HistoryService {
   constructor(
     @InjectRepository(HistoryEntity)
     private _history: Repository<HistoryEntity>,
-    private _resultService: ResultDataService,
+    private _resultService: ResultService,
     private _service: AppService
   ) {}
 

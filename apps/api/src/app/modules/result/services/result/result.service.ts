@@ -7,7 +7,7 @@ import { ResultData, ResultEntity, ResultDTO } from '@syncvr-project/domain';
 import { AppService } from '../../../../app.service';
 
 @Injectable()
-export class ResultDataService {
+export class ResultService {
   constructor(
     @InjectRepository(ResultEntity)
     private _repository: Repository<ResultEntity>,

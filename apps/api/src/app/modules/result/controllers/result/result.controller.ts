@@ -2,11 +2,11 @@ import { Controller, Get, Param } from '@nestjs/common';
 
 import { ResultData } from '@syncvr-project/domain';
 
-import { ResultDataService } from '../../services';
+import { ResultService } from '../../services';
 
-@Controller('result-data')
-export class ResultDataController {
-  constructor(private _service: ResultDataService) {}
+@Controller('result')
+export class ResultController {
+  constructor(private _service: ResultService) {}
 
   @Get('results')
   async getResults(): Promise<ResultData[]> {

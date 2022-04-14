@@ -4,8 +4,8 @@ import { Connection } from 'typeorm';
 
 import { HistoryEntity, ResultEntity } from '@syncvr-project/domain';
 
-import { HistoryDataModule } from './modules/history-data';
-import { ResultDataModule } from './modules/result-data';
+import { HistoryModule } from './modules/history';
+import { ResultModule } from './modules/result';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -22,8 +22,8 @@ import { AppService } from './app.service';
         logging: 'all'
       })
     }),
-    HistoryDataModule,
-    ResultDataModule
+    HistoryModule,
+    ResultModule
   ],
   controllers: [AppController],
   providers: [AppService],

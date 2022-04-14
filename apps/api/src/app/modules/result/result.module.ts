@@ -4,13 +4,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ResultEntity } from '@syncvr-project/domain';
 
 import { AppService } from '../../app.service';
-import { ResultDataController } from './controllers';
-import { ResultDataService } from './services';
+import { ResultController } from './controllers';
+import { ResultService } from './services';
 
 @Module({
   imports: [TypeOrmModule.forFeature([ResultEntity])],
-  controllers: [ResultDataController],
-  providers: [AppService, ResultDataService],
-  exports: [ResultDataService]
+  controllers: [ResultController],
+  providers: [AppService, ResultService],
+  exports: [ResultService]
 })
-export class ResultDataModule {}
+export class ResultModule {}

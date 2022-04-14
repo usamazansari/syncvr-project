@@ -5,11 +5,11 @@ import {
   HistoryDTO,
   ResultEntity
 } from '@syncvr-project/domain';
-import { HistoryDataService } from '../../services';
+import { HistoryService } from '../../services';
 
-@Controller('history-data')
-export class HistoryDataController {
-  constructor(private _service: HistoryDataService) {}
+@Controller('history')
+export class HistoryController {
+  constructor(private _service: HistoryService) {}
 
   @Post('entry')
   createEntry(@Body('payload') payload: number): Promise<ResultEntity> {
