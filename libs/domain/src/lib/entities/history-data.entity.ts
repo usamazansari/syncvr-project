@@ -6,10 +6,10 @@ import {
   PrimaryGeneratedColumn
 } from 'typeorm';
 
-import { ResultDataEntity } from '.';
+import { ResultEntity } from '.';
 
 @Entity('history')
-export class HistoryDataEntity extends BaseEntity {
+export class HistoryEntity extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id!: string;
 
@@ -19,6 +19,6 @@ export class HistoryDataEntity extends BaseEntity {
   @Column()
   payload!: number;
 
-  @OneToOne(() => ResultDataEntity, resultData => resultData.id)
+  @OneToOne(() => ResultEntity, resultData => resultData.id)
   result!: string;
 }

@@ -1,7 +1,7 @@
 import { BaseEntity, PrimaryColumn, Column, Entity } from 'typeorm';
 
 @Entity('result')
-export class ResultDataEntity extends BaseEntity {
+export class ResultEntity extends BaseEntity {
   @PrimaryColumn()
   id!: string;
 

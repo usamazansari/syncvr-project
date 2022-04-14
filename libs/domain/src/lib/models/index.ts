@@ -1,3 +1,3 @@
-export * from './common';
-export * from './result-data.model';
+export * from './base';
+export * from './data';
 export * from './view';

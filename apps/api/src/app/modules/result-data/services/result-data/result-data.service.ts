@@ -3,8 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import {
-  ResultDataModel,
-  ResultDataEntity,
+  ResultData,
+  ResultEntity,
   ResultDataDTO
 } from '@syncvr-project/domain';
 
@@ -13,24 +13,24 @@ import { AppService } from '../../../../app.service';
 @Injectable()
 export class ResultDataService {
   constructor(
-    @InjectRepository(ResultDataEntity)
-    private _repository: Repository<ResultDataEntity>,
+    @InjectRepository(ResultEntity)
+    private _repository: Repository<ResultEntity>,
     private _service: AppService
   ) {}
 
-  async createResult(dto: ResultDataDTO): Promise<ResultDataEntity> {
+  async createResult(dto: ResultDataDTO): Promise<ResultEntity> {
     return await this._repository.save(dto);
   }
 
-  async getResults(): Promise<ResultDataModel[]> {
+  async getResults(): Promise<ResultData[]> {
     return await this._repository.find().then(data => {
-      return data.map(item => this._service.getResult(item));
+      return data.map(item => this._service.getResultData(item));
     });
   }
 
-  async getResult(id: string): Promise<ResultDataModel> {
+  async getResult(id: string): Promise<ResultData> {
     return await this._repository
       .findOne(id)
-      .then(data => this._service.getResult(data));
+      .then(data => this._service.getResultData(data));
   }
 }

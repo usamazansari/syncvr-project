@@ -1,23 +1,19 @@
 import { Injectable } from '@nestjs/common';
 
-import {
-  FibonacciResult,
-  ResultDataDTO,
-  ResultDataModel
-} from '@syncvr-project/domain';
+import { Result, ResultData, ResultDataDTO } from '@syncvr-project/domain';
 
 @Injectable()
 export class AppService {
-  #result: FibonacciResult = new FibonacciResult({});
+  #result: Result = new Result({});
   #id = '';
 
-  getFibonacci(n = 2): FibonacciResult {
+  getResult(n = 2): Result {
     this.#id = `${n}`;
     const series = [0, 1];
     for (let i = 2; i <= n - 1; i++) {
       series.push(series[i - 1] + series[i - 2]);
     }
-    this.#result = new FibonacciResult({ series, last: series.at(-1) });
+    this.#result = new Result({ series, last: series.at(-1) });
     return this.#result;
   }
 
@@ -37,8 +33,8 @@ export class AppService {
     });
   }
 
-  getResult(dto: ResultDataDTO): ResultDataModel {
-    return new ResultDataModel({
+  getResultData(dto: ResultDataDTO): ResultData {
+    return new ResultData({
       id: dto.id,
       series: dto.series.split(',').map(Number),
       last: dto.last

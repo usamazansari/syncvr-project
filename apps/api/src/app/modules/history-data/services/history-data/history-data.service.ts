@@ -3,9 +3,9 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import {
-  HistoryDataEntity,
+  HistoryEntity,
   HistoryDataDTO,
-  ResultDataEntity
+  ResultEntity
 } from '@syncvr-project/domain';
 import { ResultDataService } from '../../../result-data';
 import { AppService } from '../../../../app.service';
@@ -13,16 +13,14 @@ import { AppService } from '../../../../app.service';
 @Injectable()
 export class HistoryDataService {
   constructor(
-    @InjectRepository(HistoryDataEntity)
-    private _history: Repository<HistoryDataEntity>,
+    @InjectRepository(HistoryEntity)
+    private _history: Repository<HistoryEntity>,
     private _resultService: ResultDataService,
     private _service: AppService
   ) {}
 
-  async createEntry(
-    dto: HistoryDataDTO
-  ): Promise<HistoryDataEntity | ResultDataEntity> {
-    this._service.getFibonacci(dto.payload);
+  async createEntry(dto: HistoryDataDTO): Promise<ResultEntity> {
+    this._service.getResult(dto.payload);
     return await this._history
       .save(dto)
       .then(
@@ -31,7 +29,7 @@ export class HistoryDataService {
       );
   }
 
-  async getEntries(): Promise<HistoryDataEntity[]> {
+  async getEntries(): Promise<HistoryEntity[]> {
     return await this._history.find();
   }
 }

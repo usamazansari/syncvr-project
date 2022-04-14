@@ -1,6 +1,6 @@
 import { Controller, Get, Param } from '@nestjs/common';
 
-import { FibonacciResult as ResultDataModel } from '@syncvr-project/domain';
+import { ResultData } from '@syncvr-project/domain';
 
 import { ResultDataService } from '../../services';
 
@@ -9,12 +9,12 @@ export class ResultDataController {
   constructor(private _service: ResultDataService) {}
 
   @Get('results')
-  async getResults(): Promise<ResultDataModel[]> {
+  async getResults(): Promise<ResultData[]> {
     return await this._service.getResults();
   }
 
   @Get('result/:id')
-  async getResult(@Param('id') id: string): Promise<ResultDataModel> {
+  async getResult(@Param('id') id: string): Promise<ResultData> {
     return await this._service.getResult(id);
   }
 }
