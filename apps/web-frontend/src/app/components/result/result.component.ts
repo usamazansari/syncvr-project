@@ -31,10 +31,10 @@ export class ResultComponent implements OnInit {
 
   private watchResult() {
     this.#result$.subscribe(result => {
-      this.#result$.next(result);
+      result.series = `${result.series}`.split(',').map(Number);
       if (!!result.series.length) {
         this.setTableData({
-          series: `${result.series}`.split(',').map(Number)
+          series: result.series
         });
       }
     });
