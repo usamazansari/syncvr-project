@@ -1,10 +1,10 @@
-<div class="container my-0 mx-auto min-h-screen grid grid-cols-1 lg:grid-cols-2">
-  <div class="flex flex-col">
+<div class="w-screen grid grid-cols-1 lg:grid-cols-10 gap-4 p-4">
+  <div class="grid grid-cols-1 gap-4 lg:col-start-1 lg:col-end-5">
     <syncvr-project-form (triggerResult$)="fetchFibonacci($event)"></syncvr-project-form>
     <syncvr-project-result [result]="(result$ | async)!"
       [addresser]="addresser$ | async"></syncvr-project-result>
   </div>
-  <div class="flex flex-col">
+  <div class="flex flex-col lg:col-start-5 lg:col-end-11">
     <syncvr-project-history [history]="(history$ | async)!"
       (fetchResult$)="fetchResult($event)"
       (fetchHistory$)="fetchHistory()"></syncvr-project-history>
