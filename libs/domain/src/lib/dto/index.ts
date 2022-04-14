@@ -1,2 +1,2 @@
-export * from './history-data.dto';
-export * from './result-data.dto';
+export * from './history.dto';
+export * from './result.dto';

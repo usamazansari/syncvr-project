@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 
 import {
   HistoryEntity,
-  HistoryDataDTO,
+  HistoryDTO,
   ResultEntity
 } from '@syncvr-project/domain';
 import { ResultDataService } from '../../../result-data';
@@ -19,7 +19,7 @@ export class HistoryDataService {
     private _service: AppService
   ) {}
 
-  async createEntry(dto: HistoryDataDTO): Promise<ResultEntity> {
+  async createEntry(dto: HistoryDTO): Promise<ResultEntity> {
     this._service.getResult(dto.payload);
     return await this._history
       .save(dto)

@@ -2,11 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import {
-  ResultData,
-  ResultEntity,
-  ResultDataDTO
-} from '@syncvr-project/domain';
+import { ResultData, ResultEntity, ResultDTO } from '@syncvr-project/domain';
 
 import { AppService } from '../../../../app.service';
 
@@ -18,7 +14,7 @@ export class ResultDataService {
     private _service: AppService
   ) {}
 
-  async createResult(dto: ResultDataDTO): Promise<ResultEntity> {
+  async createResult(dto: ResultDTO): Promise<ResultEntity> {
     return await this._repository.save(dto);
   }
 

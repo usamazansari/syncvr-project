@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
-import { Result, ResultData, ResultDataDTO } from '@syncvr-project/domain';
+import { Result, ResultData, ResultDTO } from '@syncvr-project/domain';
 
 @Injectable()
 export class AppService {
@@ -25,15 +25,15 @@ export class AppService {
     return this.#id;
   }
 
-  getResultDTO(): ResultDataDTO {
-    return new ResultDataDTO({
+  getResultDTO(): ResultDTO {
+    return new ResultDTO({
       id: this.#id,
       series: this.#result.series.join(),
       last: this.#result.last
     });
   }
 
-  getResultData(dto: ResultDataDTO): ResultData {
+  getResultData(dto: ResultDTO): ResultData {
     return new ResultData({
       id: dto.id,
       series: dto.series.split(',').map(Number),
