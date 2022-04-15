@@ -1,12 +1,16 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 
 import { ResultData } from '@syncvr-project/domain';
-
 import { ResultService } from '../../services';
 
 @Controller('result')
 export class ResultController {
   constructor(private _service: ResultService) {}
+
+  @Post('create')
+  async createResult(@Body('payload') payload: number): Promise<ResultData> {
+    return await this._service.createResult(payload);
+  }
 
   @Get('results')
   async getResults(): Promise<ResultData[]> {

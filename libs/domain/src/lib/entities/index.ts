@@ -1,2 +1,2 @@
-export * from './history-data.entity';
-export * from './result-data.entity';
+export * from './history.entity';
+export * from './result.entity';

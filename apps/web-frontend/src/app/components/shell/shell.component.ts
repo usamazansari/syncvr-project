@@ -18,10 +18,16 @@ export class ShellComponent {
 
   constructor(private _service: CoreService) {}
 
+  private writeHistory($: number) {
+    this._service.writeToDB($).subscribe(() => {
+      this.fetchHistory();
+    });
+  }
+
   public fetchFibonacci($: number): void {
     this._service.fetchFibonacci($).subscribe(result => {
       this.result$.next(result);
-      this.fetchHistory();
+      this.writeHistory($);
       this.addresser$.next(Addresser.Form);
     });
   }

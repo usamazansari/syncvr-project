@@ -77,6 +77,10 @@ export class HistoryComponent implements OnInit {
       new TableColumn({
         name: 'Payload',
         identifier: 'value'
+      }),
+      new TableColumn({
+        name: 'View',
+        identifier: 'view'
       })
     );
   }

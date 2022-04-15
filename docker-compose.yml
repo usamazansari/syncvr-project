@@ -1,0 +1,13 @@
+version: '3.3'
+services:
+  postgres:
+    container_name: syncvr-pg
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - PG_TRUST_LOCALNET=true
+    ports:
+      - '5432:5432'
+    volumes:
+      - '/volumes/postgres:/var/lib/postgresql/data'
+    image: postgres

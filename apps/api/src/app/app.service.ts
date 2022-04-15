@@ -1,6 +1,12 @@
 import { Injectable } from '@nestjs/common';
 
-import { Result, ResultData, ResultDTO } from '@syncvr-project/domain';
+import {
+  HistoryData,
+  HistoryDTO,
+  Result,
+  ResultData,
+  ResultDTO
+} from '@syncvr-project/domain';
 
 @Injectable()
 export class AppService {
@@ -8,7 +14,7 @@ export class AppService {
   #id = '';
 
   getResult(n = 2): Result {
-    this.#id = `${n}`;
+    this.updateId(`${n}`);
     const series = [0, 1];
     for (let i = 2; i <= n - 1; i++) {
       series.push(series[i - 1] + series[i - 2]);
@@ -27,7 +33,7 @@ export class AppService {
 
   getResultDTO(): ResultDTO {
     return new ResultDTO({
-      id: this.#id,
+      id: this.getId(),
       series: this.#result.series.join(),
       last: this.#result.last
     });
@@ -38,6 +44,17 @@ export class AppService {
       id: dto.id,
       series: dto.series.split(',').map(Number),
       last: dto.last
+    });
+  }
+
+  getHistoryDTO(payload: number): HistoryDTO {
+    return new HistoryDTO({ payload });
+  }
+
+  getHistoryData(dto: HistoryDTO): HistoryData {
+    return new HistoryData({
+      ...dto,
+      id: this.getId()
     });
   }
 }

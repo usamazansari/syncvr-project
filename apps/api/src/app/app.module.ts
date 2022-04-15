@@ -1,6 +1,6 @@
 import { Module, OnModuleDestroy } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Connection } from 'typeorm';
+import { Connection, ConnectionOptions } from 'typeorm';
 
 import { HistoryEntity, ResultEntity } from '@syncvr-project/domain';
 
@@ -13,12 +13,15 @@ import { AppService } from './app.service';
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({
-      useFactory: () => ({
-        type: 'sqlite',
-        database: './database.sqlite',
+      useFactory: (): ConnectionOptions => ({
+        type: 'postgres',
+        host: 'localhost',
+        port: 5432,
+        database: 'syncvr',
+        username: 'postgres',
+        password: 'postgres',
         entities: [HistoryEntity, ResultEntity],
         synchronize: true,
-        autoLoadEntities: true,
         logging: 'all'
       })
     }),

@@ -11,8 +11,14 @@ export class CoreService {
   constructor(private readonly _http: HttpClient) {}
 
   fetchFibonacci(n: number): Observable<ResultData> {
-    return this._http.post<ResultData>(`/api/history/entry`, {
+    return this._http.post<ResultData>(`/api/result/create`, {
       payload: `${n}`
+    });
+  }
+
+  writeToDB(payload: number): Observable<HistoryData> {
+    return this._http.post<HistoryData>(`/api/history/create`, {
+      payload
     });
   }
 

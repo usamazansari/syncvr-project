@@ -41,15 +41,6 @@ export class TableComponent implements OnInit {
     return this.#columns$.getValue();
   }
 
-  #viewColumn$ = new BehaviorSubject<boolean>(false);
-  @Input()
-  set viewColumn(value: boolean) {
-    this.#viewColumn$.next(value);
-  }
-  get viewColumn() {
-    return this.#viewColumn$.getValue();
-  }
-
   private _paginator!: MatPaginator;
   @ViewChild(MatPaginator, { static: false })
   private set paginator(paginator: MatPaginator) {
@@ -64,9 +55,7 @@ export class TableComponent implements OnInit {
       this.dataSource.data = data;
     });
     this.#columns$.subscribe(columns => {
-      this.displayedColumns = this.viewColumn
-        ? [...columns.map(column => column.identifier), 'view']
-        : columns.map(column => column.identifier);
+      this.displayedColumns = columns.map(column => column.identifier);
     });
   }
 

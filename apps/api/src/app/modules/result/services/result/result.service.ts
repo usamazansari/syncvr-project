@@ -2,8 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { ResultData, ResultEntity, ResultDTO } from '@syncvr-project/domain';
-
+import { ResultData, ResultEntity } from '@syncvr-project/domain';
 import { AppService } from '../../../../app.service';
 
 @Injectable()
@@ -14,8 +13,12 @@ export class ResultService {
     private _service: AppService
   ) {}
 
-  async createResult(dto: ResultDTO): Promise<ResultEntity> {
-    return await this._repository.save(dto);
+  async createResult(payload: number): Promise<ResultData> {
+    this._service.getResult(payload);
+    const dto = this._service.getResultDTO();
+    return await this._repository
+      .save(dto)
+      .then(data => this._service.getResultData(data));
   }
 
   async getResults(): Promise<ResultData[]> {
