@@ -15,7 +15,14 @@ import { join } from 'path';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({}),
+    ConfigModule.forRoot({
+      envFilePath: [
+        '.env.development.local',
+        '.env.development',
+        '.env.local',
+        '.env'
+      ]
+    }),
     // TypeOrmModule.forRootAsync({
     //   useFactory: (): ConnectionOptions => ({
     //     type: 'postgres',

@@ -11,6 +11,7 @@
     "build:web-frontend": "nx run web-frontend:build:production",
     "postbuild:web-frontend": "purgecss --config ./configs/purgecss.config.js",
     "build": "npm run build:api && npm run build:web-frontend && npm run postbuild:web-frontend",
+    "start": "node ./dist/apps/api/main.js",
     "test": "nx test"
   },
   "private": true,

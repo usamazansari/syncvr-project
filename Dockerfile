@@ -4,8 +4,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 RUN npm ci
 COPY . .
-RUN npm run build_ui
-RUN npm run build_api
+RUN npm run build
 
 # FROM nginx:1.17.10-alpine as ui
 # COPY configs/nginx.conf /etc/nginx/nginx.conf
