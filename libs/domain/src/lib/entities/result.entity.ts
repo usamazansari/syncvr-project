@@ -8,6 +8,6 @@ export class ResultEntity extends BaseEntity {
   @Column()
   series!: string;
 
-  @Column()
+  @Column({ type: 'float', nullable: true })
   last!: number;
 }
