@@ -7,8 +7,10 @@
     "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2015 browser module main",
     "start:api": "nx run api:serve",
     "start:web-frontend": "nx run web-frontend:serve:development",
-    "build": "nx build",
-    "postbuild": "purgecss --config ./configs/purgecss.config.js",
+    "build:api": "nx run api:build:production",
+    "build:ui": "nx run web-frontend:build:production",
+    "postbuild:ui": "purgecss --config ./configs/purgecss.config.js",
+    "build": "nx run build:api",
     "test": "nx test"
   },
   "private": true,
