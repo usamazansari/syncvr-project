@@ -38,6 +38,13 @@
             ({{ result.series.length }} items)
           </p>
         </div>
+        <div class="flex items-center">
+          <ng-container *ngIf="addresser === ADDRESSER_STUB.History">
+            <p class="my-4 text-green-500">
+              Requested at: <span class="font-mono">{{ timestamp | date: 'full' }}</span>
+            </p>
+          </ng-container>
+        </div>
       </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>

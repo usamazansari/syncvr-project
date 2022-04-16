@@ -31,6 +31,15 @@ export class ResultComponent implements OnInit {
     return this.#addresser$.getValue();
   }
 
+  #timestamp$ = new BehaviorSubject<Date>(new Date());
+  @Input()
+  set timestamp(value: Date) {
+    this.#timestamp$.next(value);
+  }
+  get timestamp() {
+    return this.#timestamp$.getValue();
+  }
+
   ADDRESSER_STUB = Addresser;
 
   tableData: ResultTableView[] = [];

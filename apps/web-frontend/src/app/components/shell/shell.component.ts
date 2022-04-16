@@ -15,11 +15,13 @@ export class ShellComponent {
   public result$ = new BehaviorSubject<Result>(new Result({}));
   public history$ = new BehaviorSubject<History[]>([]);
   public addresser$ = new BehaviorSubject<Addresser | null>(null);
+  public timestamp$ = new BehaviorSubject<Date>(new Date());
 
   constructor(private _service: CoreService) {}
 
   private writeHistory($: number) {
-    this._service.writeToDB($).subscribe(() => {
+    this._service.writeToDB($).subscribe(history => {
+      this.timestamp$.next(history.timestamp);
       this.fetchHistory();
     });
   }
