@@ -1,4 +1,5 @@
 import { Module, OnModuleDestroy } from '@nestjs/common';
+import { ServeStaticModule } from '@nestjs/serve-static';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Connection, ConnectionOptions } from 'typeorm';
 
@@ -9,6 +10,7 @@ import { ResultModule } from './modules/result';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -17,13 +19,16 @@ import { AppService } from './app.service';
         type: 'postgres',
         host: 'localhost',
         port: 5432,
-        database: 'syncvr',
+        database: 'postgres',
         username: 'postgres',
         password: 'postgres',
         entities: [HistoryEntity, ResultEntity],
         synchronize: true,
         logging: 'all'
       })
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, 'web-frontend')
     }),
     HistoryModule,
     ResultModule
