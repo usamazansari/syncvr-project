@@ -11,3 +11,9 @@ services:
     volumes:
       - '/volumes/postgres:/var/lib/postgresql/data'
     image: postgres
+  api:
+    container_name: syncvr
+    ports:
+      - '3333:3333'
+    expose:
+      - 3333
