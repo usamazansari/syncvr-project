@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 
 import { MaterialModule } from './modules';
 import {
+  DialogComponent,
   FormComponent,
   ResultComponent,
   HistoryComponent,
@@ -18,12 +19,14 @@ import {
 
 @NgModule({
   declarations: [
+    DialogComponent,
     AppComponent,
     ShellComponent,
     FormComponent,
     ResultComponent,
     HistoryComponent,
-    TableComponent
+    TableComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
