@@ -62,11 +62,11 @@
       "configurations": {
         "production": {
           "browserTarget": "web-frontend:build:production",
-          "proxyConfig": "apps/web-frontend/prod-proxy.conf.json"
+          "proxyConfig": "apps/web-frontend/proxies/prod-proxy.conf.json"
         },
         "development": {
           "browserTarget": "web-frontend:build:development",
-          "proxyConfig": "apps/web-frontend/dev-proxy.conf.json"
+          "proxyConfig": "apps/web-frontend/proxies/dev-proxy.conf.json"
         }
       },
       "defaultConfiguration": "development"
