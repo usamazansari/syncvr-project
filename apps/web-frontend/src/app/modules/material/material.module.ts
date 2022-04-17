@@ -6,6 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { MatTableModule } from '@angular/material/table';
     MatCardModule,
     MatExpansionModule,
     MatPaginatorModule,
-    MatTableModule
+    MatTableModule,
+    MatToolbarModule
   ],
   exports: [
     MatButtonModule,
@@ -22,7 +24,8 @@ import { MatTableModule } from '@angular/material/table';
     MatCardModule,
     MatExpansionModule,
     MatPaginatorModule,
-    MatTableModule
+    MatTableModule,
+    MatToolbarModule
   ]
 })
 export class MaterialModule {}

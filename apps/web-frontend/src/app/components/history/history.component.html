@@ -3,13 +3,6 @@
     <mat-card-title class="font-bold">History</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <div class="flex justify-end items-center">
-      <button mat-icon-button
-        class="bg-blue-500 text-white"
-        (click)="refetchHistory()">
-        <span class="material-icons">sync</span>
-      </button>
-    </div>
     <ng-container *ngIf="!!tableData.length; else noData">
       <syncvr-project-table [data]="tableData"
         [columns]="tableColumns"
