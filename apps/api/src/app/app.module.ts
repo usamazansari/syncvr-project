@@ -15,38 +15,18 @@ import { join } from 'path';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      //   envFilePath: [
-      //     '.env.development.local',
-      //     '.env.development',
-      //     '.env.local',
-      //     '.env'
-      //   ]
-    }),
-    // TypeOrmModule.forRootAsync({
-    //   useFactory: (): ConnectionOptions => ({
-    //     type: 'postgres',
-    //     host: 'localhost',
-    //     port: 5432,
-    //     database: 'postgres',
-    //     username: 'postgres',
-    //     password: 'postgres',
-    //     entities: [HistoryEntity, ResultEntity],
-    //     synchronize: true,
-    //     logging: 'all'
-    //   })
-    // }),
+    ConfigModule.forRoot({}),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (configService: ConfigService): ConnectionOptions => ({
         type: 'postgres',
         url: configService.get('DATABASE_URL'),
-        // host: configService.get('HOST'),
-        // port: +configService.get('PORT'),
-        username: configService.get('USERNAME'),
-        password: configService.get('PASSWORD'),
-        database: configService.get('DATABASE'),
         entities: [HistoryEntity, ResultEntity],
+        extra: {
+          ssl: {
+            rejectUnauthorized: false
+          }
+        },
         synchronize: true,
         logging: 'all'
       }),
@@ -64,11 +44,7 @@ import { join } from 'path';
   exports: [AppService]
 })
 export class AppModule implements OnModuleDestroy {
-  constructor(private readonly _connection: Connection) {
-    console.log('AppModule');
-    console.log({ env: process.env });
-    console.log(process.env.DATABASE_URL);
-  }
+  constructor(private readonly _connection: Connection) {}
 
   onModuleDestroy(): void {
     this._connection.close();
