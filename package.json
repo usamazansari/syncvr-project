@@ -12,6 +12,9 @@
     "postbuild:web-frontend": "purgecss --config ./configs/purgecss.config.js",
     "build": "npm run build:api && npm run build:web-frontend && npm run postbuild:web-frontend",
     "start": "node dist/apps/api/main.js",
+    "build:web-frontend:stats": "nx run web-frontend:build:development --stats-json",
+    "source-map-explorer": "source-map-explorer dist/apps/web-frontend/**/*.js --only-mapped --no-border-checks",
+    "webpack-bundle-analyzer": "webpack-bundle-analyzer dist/apps/web-frontend/stats.json",
     "test": "nx test"
   },
   "private": true,
@@ -73,9 +76,11 @@
     "postcss": "^8.4.5",
     "prettier": "^2.5.1",
     "purgecss": "^4.1.3",
+    "source-map-explorer": "^2.5.2",
     "tailwindcss": "^3.0.2",
     "ts-jest": "27.0.5",
-    "typescript": "~4.6.2"
+    "typescript": "~4.6.2",
+    "webpack-bundle-analyzer": "^4.5.0"
   },
   "engines": {
     "node": "16.x"
