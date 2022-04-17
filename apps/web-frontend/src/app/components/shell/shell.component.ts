@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { BehaviorSubject } from 'rxjs';
 
 import { History, Result } from '@syncvr-project/domain';
 
 import { CoreService } from '../../services';
-import { DialogComponent } from '..';
 
 @Component({
   selector: 'syncvr-project-shell',
@@ -19,7 +17,7 @@ export class ShellComponent {
   public addresser$ = new BehaviorSubject<Addresser | null>(null);
   public timestamp$ = new BehaviorSubject<Date>(new Date());
 
-  constructor(private _service: CoreService, public dialog: MatDialog) {}
+  constructor(private _service: CoreService) {}
 
   private writeHistory($: number) {
     this._service.writeToDB($).subscribe(history => {
@@ -47,10 +45,6 @@ export class ShellComponent {
       this.result$.next(result);
       this.addresser$.next(Addresser.History);
     });
-  }
-
-  public openDialog(): void {
-    this.dialog.open(DialogComponent, {});
   }
 }
 

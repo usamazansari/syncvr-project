@@ -10,7 +10,9 @@ import { AppComponent } from './app.component';
 import { MaterialModule } from './modules';
 import {
   DialogComponent,
+  FooterComponent,
   FormComponent,
+  HeaderComponent,
   ResultComponent,
   HistoryComponent,
   TableComponent,
@@ -19,14 +21,15 @@ import {
 
 @NgModule({
   declarations: [
-    DialogComponent,
     AppComponent,
-    ShellComponent,
+    DialogComponent,
+    FooterComponent,
     FormComponent,
-    ResultComponent,
+    HeaderComponent,
     HistoryComponent,
-    TableComponent,
-    DialogComponent
+    ResultComponent,
+    ShellComponent,
+    TableComponent
   ],
   imports: [
     BrowserModule,
