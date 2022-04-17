@@ -11,7 +11,7 @@
     "build:web-frontend": "nx run web-frontend:build:production",
     "postbuild:web-frontend": "purgecss --config ./configs/purgecss.config.js",
     "build": "npm run build:api && npm run build:web-frontend && npm run postbuild:web-frontend",
-    "start": "node ./dist/apps/api/main.js",
+    "start": "node dist/apps/api/main.js",
     "test": "nx test"
   },
   "private": true,
@@ -76,5 +76,8 @@
     "tailwindcss": "^3.0.2",
     "ts-jest": "27.0.5",
     "typescript": "~4.6.2"
+  },
+  "engines": {
+    "node": "16.x"
   }
 }

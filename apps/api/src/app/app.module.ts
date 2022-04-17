@@ -16,12 +16,12 @@ import { join } from 'path';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: [
-        '.env.development.local',
-        '.env.development',
-        '.env.local',
-        '.env'
-      ]
+      //   envFilePath: [
+      //     '.env.development.local',
+      //     '.env.development',
+      //     '.env.local',
+      //     '.env'
+      //   ]
     }),
     // TypeOrmModule.forRootAsync({
     //   useFactory: (): ConnectionOptions => ({
@@ -53,7 +53,8 @@ import { join } from 'path';
       inject: [ConfigService]
     }),
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, 'web-frontend')
+      rootPath: join(__dirname, '..', 'web-frontend'),
+      exclude: ['/api/**']
     }),
     HistoryModule,
     ResultModule
