@@ -1,4 +1,13 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn
+} from 'typeorm';
+
+import { ResultEntity } from '.';
 
 @Entity('history')
 export class HistoryEntity extends BaseEntity {
@@ -10,4 +19,8 @@ export class HistoryEntity extends BaseEntity {
 
   @Column()
   payload!: number;
+
+  @ManyToOne(() => ResultEntity)
+  @JoinColumn()
+  result!: string;
 }
