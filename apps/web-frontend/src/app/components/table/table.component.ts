@@ -9,7 +9,7 @@ import {
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
-import { ResultTableView } from '@syncvr-project/domain';
+import { HistoryTableView, ResultTableView } from '@syncvr-project/domain';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
@@ -48,7 +48,7 @@ export class TableComponent implements OnInit {
     this.dataSource.paginator = paginator;
   }
 
-  @Output() triggerView$ = new EventEmitter<ResultTableView>();
+  @Output() viewResult$ = new EventEmitter<HistoryTableView>();
 
   ngOnInit(): void {
     this.#data$.subscribe(data => {
@@ -59,8 +59,8 @@ export class TableComponent implements OnInit {
     });
   }
 
-  triggerView(row: ResultTableView) {
-    this.triggerView$.emit(row);
+  viewResult(row: HistoryTableView) {
+    this.viewResult$.emit(row);
   }
 }
 

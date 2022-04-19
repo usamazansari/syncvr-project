@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
-import { History, Result } from '@syncvr-project/domain';
+import { History, HistoryTableView, Result } from '@syncvr-project/domain';
 
 import { CoreService } from '../../services';
 
@@ -40,9 +40,10 @@ export class ShellComponent {
     });
   }
 
-  public fetchResult($: number): void {
-    this._service.fetchResult($).subscribe(result => {
+  public viewResult($: HistoryTableView): void {
+    this._service.fetchResult($.value).subscribe(result => {
       this.result$.next(result);
+      this.timestamp$.next($.timestamp);
       this.addresser$.next(Addresser.History);
     });
   }

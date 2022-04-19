@@ -6,7 +6,7 @@
     <ng-container *ngIf="!!tableData.length; else noData">
       <syncvr-project-table [data]="tableData"
         [columns]="tableColumns"
-        (triggerView$)="fetchResult($event)"></syncvr-project-table>
+        (viewResult$)="viewResult($event)"></syncvr-project-table>
     </ng-container>
     <ng-template #noData>
       <p class="text-center text-red-500 font-bold">No entries in the database</p>
