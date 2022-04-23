@@ -8,10 +8,12 @@
       <div class="flex flex-col">
         <div class="flex justify-between items-center">
           <p class="mb-2">Count of Fibonacci numbers to generate</p>
-          <p class="mb-2">
+          <p id="form-range-value"
+            class="mb-2">
             {{ form.value.n }}
         </div>
-        <input type="range"
+        <input id="form-input-range"
+          type="range"
           [formControlName]="'n'"
           min="2"
           max="50" />
